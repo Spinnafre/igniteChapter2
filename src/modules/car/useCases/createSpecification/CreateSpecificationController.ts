@@ -2,14 +2,14 @@ import { Request, Response } from "express"
 import { ISpecificationProtocol } from "../../Protocols/Specifications/SpecificationProtocols"
 
 interface specificationService{
-    execute({name,description}:ISpecificationProtocol):void
+    execute({name,description}:ISpecificationProtocol):Promise<void>
 }
 
 export class CreateSpecificationController{
     constructor(private specificationService:specificationService) {}
-    handle(req:Request,res:Response):Response{
+    async handle(req:Request,res:Response):Promise<Response>{
         const {name,description}=req.body
-        this.specificationService.execute({name,description,created_at:new Date()})
+        await this.specificationService.execute({name,description})
         return res.status(201).json({msg:'Specifications created with success'})
     }
 }

@@ -3,12 +3,12 @@ import { Request } from 'express';
 import { ISpecificationProtocol } from "../../Protocols/Specifications/SpecificationProtocols";
 
 interface specificationService{
-    execute():Array<ISpecificationProtocol>
+    execute():Promise<Array<ISpecificationProtocol>>
 }
 
 export class SpecificationController{
     constructor(private specificationService:specificationService) {}
-    handle(req:Request,res:Response):Response{
-        return res.status(200).json(this.specificationService.execute())
+    async handle(req:Request,res:Response):Promise<Response>{
+        return res.status(200).json(await this.specificationService.execute())
     }
 }

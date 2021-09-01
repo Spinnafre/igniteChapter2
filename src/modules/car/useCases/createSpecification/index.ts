@@ -2,8 +2,10 @@ import { SpecificationRepository } from "../../repositories/SpecificationReposit
 import { CreateSpecificationController } from "./CreateSpecificationController"
 import { CreateSpecificationService } from "./CreateSpecificationService"
 
-const specificationRepository=SpecificationRepository.getInstance()
-const specificationService=new CreateSpecificationService(specificationRepository)
-const specificationController= new CreateSpecificationController(specificationService)
+export default ():CreateSpecificationController => {
+    const specificationRepository = new SpecificationRepository()
+    const specificationService = new CreateSpecificationService(specificationRepository)
+    const specificationController = new CreateSpecificationController(specificationService)
+    return specificationController
+}
 
-export {specificationController}

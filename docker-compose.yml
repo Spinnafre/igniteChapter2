@@ -1,0 +1,40 @@
+# Versão que vai ser utilizado no dockercompose
+version: "3.7"
+# Serviços necessários para rodar 
+services: 
+  database-ignite:
+    image: postgres
+    container_name: database-ignite
+    restart: always
+    ports: 
+      - 5432:5432
+      #Variáveis ambientes disponível na imagem 
+    environment: 
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=rentex
+    volumes: 
+      - pgdata:/data/postgres
+    #Fazer com que os container trabalhem na mesma rede, evitando problemas de ip diferentes
+    networks:
+      - my-proxy-net
+  # Nome do serviço
+  app:
+    # Gerar build a partir do diretório atual
+    build: .
+    container_name: rentex-container
+    ports: 
+      # Definir o mapeamento de portas: Quando acessar a porta 3333 da minha máquina, irá acessar a 3333 do container
+      - 3333:3333
+    volumes:
+      # Pega as informações do diretório atual (.) e jogar dentro do  /user/app
+      - .:/user/app
+    networks:
+      - my-proxy-net
+networks:
+  my-proxy-net:
+    external:
+      name: host
+volumes: 
+  pgdata:
+    driver: local

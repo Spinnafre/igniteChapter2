@@ -1,33 +1,32 @@
-import { Specification } from './../models/Specification';
+import { Repository, getRepository } from "typeorm";
+import { Specification } from "../entities/Specification";
 import { ISpecificationProtocol } from "../Protocols/Specifications/SpecificationProtocols";
 import { ISpecificationRepository } from "../Protocols/Specifications/SpecificationRepositoryProtocol";
 
-export class SpecificationRepository  implements  ISpecificationRepository{
-  private specifications:Array<ISpecificationProtocol>
-  private static INSTANCE:ISpecificationRepository|null=null
-  private constructor(){
-    this.specifications=[]
+export class SpecificationRepository implements ISpecificationRepository {
+  private specifications: Repository<Specification>;
+  // private static INSTANCE:ISpecificationRepository|null=null
+  constructor() {
+    this.specifications = getRepository(Specification);
   }
-  static getInstance():ISpecificationRepository{
-    if(SpecificationRepository.INSTANCE === null){
-      SpecificationRepository.INSTANCE=new SpecificationRepository()
-    }
-    return SpecificationRepository.INSTANCE
-  }
-  create({name,description}:ISpecificationProtocol):void{
-    const specification=new Specification()
-    Object.assign(specification,{
+  // static getInstance():ISpecificationRepository{
+  //   if(SpecificationRepository.INSTANCE === null){
+  //     SpecificationRepository.INSTANCE=new SpecificationRepository()
+  //   }
+  //   return SpecificationRepository.INSTANCE
+  // }
+  async create({ name, description }: ISpecificationProtocol): Promise<void> {
+    const specification = this.specifications.create({
       name,
       description,
-      created_at:new Date()
-    })
-    this.specifications.push(specification)
+    });
+    await this.specifications.save(specification)
   }
-  findByName(name:string):boolean{
-    const specification=this.specifications.some(s=>s.name===name)
-    return specification
+  async findByName(name: string): Promise<boolean> {
+    const specification = await this.specifications.findOne({name});
+    return !!specification;
   }
-  show():Array<ISpecificationProtocol>{
-    return this.specifications
+  async show(): Promise<Array<ISpecificationProtocol>> {
+    return await this.specifications.find()
   }
 }

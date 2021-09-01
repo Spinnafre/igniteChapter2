@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import multer from "multer";
 
 interface importCategoryService{
-    execute(file:any):void
+    execute(file:any):Promise<void>
 }
 
 // var storage = multer.diskStorage({
@@ -17,9 +17,9 @@ interface importCategoryService{
 
 export class importCategoryController {
   constructor(private importCategoryService:importCategoryService) {}
-  handler(req: Request, res: Response): Response {
+  async handler(req: Request, res: Response): Promise<Response> {
     const {file}=req
-    this.importCategoryService.execute(file)
+    await this.importCategoryService.execute(file)
     return res.status(201).json({ msg: "Arquivo enviado com sucesso "});
   }
 }

@@ -26,6 +26,7 @@ export class ImportCategoryService {
           });
         })
         .on("end", () => {
+          // Remove o arquivo
           fs.promises.unlink(file.path)
             resolve(categories)
         })
@@ -36,11 +37,11 @@ export class ImportCategoryService {
   }
   async execute(file: Express.Multer.File): Promise<void>{
       const readFile=await this.loadCategories(file)
-      readFile.forEach(cat=>{
+      readFile.forEach(async cat=>{
           const {name,description}=cat
-          const alreadExists=this.importCategoryRepository.findByCategory(name)
+          const alreadExists=await this.importCategoryRepository.findByCategory(name)
           if(!alreadExists){
-              this.importCategoryRepository.create({name,description})
+              await this.importCategoryRepository.create({name,description})
           }
       })
     //   this.importCategoryRepository.create(readFile)

@@ -1,8 +1,10 @@
-import { CategoryRepository } from './../../repositories/CategoriesRepository';
+import { CategoryRepository } from "../../repositories/CategoriesRepository";
 import { ShowCategoryController } from "./ShowCategoryController";
-import { ShowCategoryService } from './ShowCategoryService';
+import { ShowCategoryService } from "./ShowCategoryService";
 
-const categoryRepository=CategoryRepository.getInstance()
-const categoryService=new ShowCategoryService(categoryRepository)
-const showCategoryController=new ShowCategoryController(categoryService)
-export {showCategoryController}
+export default () => {
+  const categoryRepository = new CategoryRepository();
+  const categoryService = new ShowCategoryService(categoryRepository);
+  const showCategoryController = new ShowCategoryController(categoryService);
+  return showCategoryController;
+};
