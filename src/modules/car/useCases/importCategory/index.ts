@@ -1,6 +1,6 @@
-import { CategoryRepository } from './../../repositories/CategoriesRepository';
 import { ImportCategoryService } from "./importCategoryService";
 import { importCategoryController } from "./importCategoryController";
+import { CategoryRepository } from "../../infra/typeORM/repositories/CategoriesRepository";
 
 export default (): importCategoryController => {
   const importCategoryRepository = new CategoryRepository();

@@ -1,4 +1,4 @@
-import { AppErrors } from './../../../../errors/AppErrors';
+import { AppErrors } from '../../../../shared/errors/AppErrors';
 import { CategoryProtocol } from "../../Protocols/Category/categoryProtocol"
 import { ICreateCategoryRepository } from "../../Protocols/Category/CategoryRespositoryProtocol"
 

@@ -1,4 +1,4 @@
-import { UserRepository } from './../../repositories/UserRepository';
+import { UserRepository } from '../../infra/typeORM/repositories/UserRepository';
 import { UserController } from './createUserController';
 import { createUserUserCase } from './CreateUserUserCase';
 

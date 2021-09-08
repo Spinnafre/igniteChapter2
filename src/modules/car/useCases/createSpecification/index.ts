@@ -1,4 +1,4 @@
-import { SpecificationRepository } from "../../repositories/SpecificationRepository"
+import { SpecificationRepository } from "../../infra/typeORM/repositories/SpecificationRepository"
 import { CreateSpecificationController } from "./CreateSpecificationController"
 import { CreateSpecificationService } from "./CreateSpecificationService"
 

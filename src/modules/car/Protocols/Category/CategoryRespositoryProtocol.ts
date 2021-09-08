@@ -1,4 +1,4 @@
-import { Category } from '../../entities/category';
+import { Category } from '../../infra/typeORM/entities/category';
 import { CategoryProtocol } from './categoryProtocol';
 export interface ICreateCategoryRepository{
     create({ name, description}: CategoryProtocol):Promise<void>,

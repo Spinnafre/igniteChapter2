@@ -1,4 +1,4 @@
-import { AppErrors } from './../../../../errors/AppErrors';
+import { AppErrors } from '../../../../shared/errors/AppErrors';
 import { ISpecificationProtocol } from '../../Protocols/Specifications/SpecificationProtocols';
 import { ISpecificationRepository } from '../../Protocols/Specifications/SpecificationRepositoryProtocol';
 export class CreateSpecificationService{
@@ -7,7 +7,6 @@ export class CreateSpecificationService{
         if(await this.specificationRepository.findByName(name)){
             throw new AppErrors('Specification already exists')
         }
-        console.log(name,' ',description)
         await this.specificationRepository.create({name,description})
     }
 }

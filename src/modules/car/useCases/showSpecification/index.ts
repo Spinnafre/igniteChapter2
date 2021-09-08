@@ -1,5 +1,5 @@
 import { SpecificationController } from "./ShowSpecificationController";
-import { SpecificationRepository } from "../../repositories/SpecificationRepository";
+import { SpecificationRepository } from "../../infra/typeORM/repositories/SpecificationRepository";
 import { ShowSpecificationService } from "./ShowSpecificationService";
 
 export default ():SpecificationController => {

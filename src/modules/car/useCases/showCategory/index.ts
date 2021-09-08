@@ -1,4 +1,4 @@
-import { CategoryRepository } from "../../repositories/CategoriesRepository";
+import { CategoryRepository } from "../../infra/typeORM/repositories/CategoriesRepository";
 import { ShowCategoryController } from "./ShowCategoryController";
 import { ShowCategoryService } from "./ShowCategoryService";
 

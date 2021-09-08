@@ -1,4 +1,4 @@
-import { UserRepository } from "../../repositories/UserRepository"
+import { UserRepository } from "../../infra/typeORM/repositories/UserRepository"
 import { updateAvatarController } from "./userUpdateAvatarController"
 import { updateAvatarService } from "./userUpdateAvatarService"
 

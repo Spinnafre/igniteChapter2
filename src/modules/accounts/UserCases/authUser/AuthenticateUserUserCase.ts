@@ -1,4 +1,4 @@
-import { AppErrors } from './../../../../errors/AppErrors';
+import { AppErrors } from '../../../../shared/errors/AppErrors';
 import { IUser } from './../../Protocols/User/UserProtocol';
 import { IUserAuthProtocol } from '../../Protocols/User/UserAuthProtocol';
 import { IUserAuthService } from '../../Protocols/User/UserAuthService';

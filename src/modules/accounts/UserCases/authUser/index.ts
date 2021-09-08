@@ -1,5 +1,5 @@
 import { UserAuthService } from './AuthenticateUserUserCase';
-import { UserRepository } from './../../repositories/UserRepository';
+import { UserRepository } from '../../infra/typeORM/repositories/UserRepository';
 import { AuthenticateUserController } from './AuthenticateUserController';
 export default ()=>{
     const userRepository=new UserRepository()

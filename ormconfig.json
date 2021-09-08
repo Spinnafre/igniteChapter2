@@ -5,9 +5,9 @@
     "username": "postgres",
     "password": "1234",
     "database": "rentex",
-    "migrations":["./src/database/migrations/*.ts"],
-    "entities":["./src/modules/**/*.ts"],
+    "migrations":["./src/shared/infra/typeORM/migrations/*.ts"],
+    "entities":["./src/modules/**/infra/typeORM/entities/*.ts"],
     "cli":{
-        "migrationsDir":"./src/database/migrations"
+        "migrationsDir":"./src/shared/infra/typeORM/migrations"
     }
  }

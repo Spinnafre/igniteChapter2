@@ -4,5 +4,6 @@ export interface IUser{
     password:string,
     driver_license:string,
     email:string,
-    avatar?:string
+    avatar?:string,
+    admin?:boolean
 }
