@@ -13,7 +13,6 @@ export class CarRepositoryinMemory implements ICarRepository {
         brand,
         category_id,
         specifications,
-        id
     }: ICar): Promise<ICar> {
         const car=new Car()
          
@@ -26,7 +25,7 @@ export class CarRepositoryinMemory implements ICarRepository {
             brand,
             category_id,
             specifications,
-            id
+
         })
         this.cars.push(car);
         return car
@@ -52,5 +51,10 @@ export class CarRepositoryinMemory implements ICarRepository {
     }
     async findById(id:string):Promise<ICar>{
         return this.cars.find(c=>c.id===id)
+    }
+    async updateAvailable(id: string, available: boolean): Promise<void> {
+        const car_id=this.cars.findIndex(c=>c.id === id)
+        this.cars[car_id].available = available
+
     }
 }

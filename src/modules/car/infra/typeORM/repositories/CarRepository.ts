@@ -57,4 +57,13 @@ export class CarRepository implements ICarRepository {
         const car = this.repository.findOne(id)
         return car
     }
+    async updateAvailable(id: string, available: boolean): Promise<void> {
+        await this.repository.createQueryBuilder('car')
+        .update()
+        .set({available})
+        .where('id = :id',{id:id})
+        .execute()
+ 
+
+    }
 }

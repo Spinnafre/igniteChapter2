@@ -31,7 +31,6 @@ export async function authorizationUser(req:Request,res:Response,next:NextFuncti
         req.user={
             id:id_user
         }
-        console.log(req.user)
         next()
 
     } catch (error) {
