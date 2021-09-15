@@ -12,7 +12,7 @@ export class Car implements ICar{
     @Column()
     daily_rate:number
     @Column()
-    available:boolean=true
+    available:boolean
     @Column()
     fine_amount:number;
     @Column()
@@ -41,6 +41,7 @@ export class Car implements ICar{
     constructor() {
       if (!this.id) {
         this.id = uuid4();
+        this.available=true
       }
     }
   }

@@ -42,7 +42,6 @@ export class CreateRentalUseCase implements ICreateRentalUseCase {
         const dateNow = this.dateProvider.DateNow()
 
         const timeDiff = this.dateProvider.compareInHours(dateNow, expected_return_date)
-        console.log('timeDiff ',timeDiff);
         //Intervalo de tempo menor do que 24hrs
         if (timeDiff < minHours) {
             throw new AppErrors('Invalid Date')

@@ -30,6 +30,7 @@ app.use(authRouter)
 app.use(carRoutes)
 app.use(rentalRoutes)
 
+
 app.use("/categories", categoriesRoutes);
 app.use("/specification", specificationsRoutes);
 app.use("/upload",upload.single('file'),importCategoriesRoutes);
