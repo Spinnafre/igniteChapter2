@@ -7,10 +7,12 @@ import { IRental } from './../../../Protocols/IRental';
 export class Rental implements IRental {
     @PrimaryColumn()
     id: string;
-  
+    
     @Column()
     car_id: string;
 
+    //Irá juntar a tablea carros
+    // através do car_id passado
     @ManyToOne(type=>Car)
     @JoinColumn({name:"car_id"})
     car:Car

@@ -33,6 +33,6 @@ describe('Create Category', () => {
         
         await expect(
             categoryUseCase.execute(category)
-        ).rejects.toBeInstanceOf(AppErrors)
+        ).rejects.toEqual(new AppErrors('Category already exists'))
     })
 })

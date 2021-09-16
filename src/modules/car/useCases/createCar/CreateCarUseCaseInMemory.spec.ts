@@ -38,7 +38,7 @@ describe('Create Car',()=>{
         
         await createCarUseCase.execute(car)
 
-        await expect(createCarUseCase.execute(car)).rejects.toBeInstanceOf(AppErrors)
+        await expect(createCarUseCase.execute(car)).rejects.toEqual(new AppErrors('Car already exists'))
     })
     it('should not be able to create a car with available true by default',async()=>{
         const car={

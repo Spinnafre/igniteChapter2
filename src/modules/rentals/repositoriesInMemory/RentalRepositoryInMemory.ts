@@ -27,8 +27,8 @@ export class RentalRepositoryInMemory implements IRentalRepository{
         const rental=this.repository.find(r=>r.id === id);
         return rental
     }
-    async findByUser(user_id: string): Promise<Rental> {
-        const rentalByUser=this.repository.find(r=>r.user_id===user_id);
+    async findByUser(user_id: string): Promise<Rental[]> {
+        const rentalByUser=this.repository.filter(r=>r.user_id===user_id);
         return rentalByUser
     }
     async create({
