@@ -1,7 +1,10 @@
+import { UserTokenRepository } from './../../../../modules/accounts/infra/typeORM/repositories/TokenRepository';
+import { auth } from '../../../../config/auth';
 import { AppErrors } from '../../../errors/AppErrors';
-import { UserRepository } from '../../../../modules/accounts/infra/typeORM/repositories/UserRepository';
+// import { UserRepository } from '../../../../modules/accounts/infra/typeORM/repositories/UserRepository';
 import { NextFunction, Response,Request  } from 'express';
 import { verify } from 'jsonwebtoken';
+
 
 interface IToken{
     sub:string,
@@ -9,19 +12,23 @@ interface IToken{
 }
 
 export async function authorizationUser(req:Request,res:Response,next:NextFunction){
+    //Extrai o refresh token
     const headerToken= req.headers.authorization
 
     if(!headerToken){
         throw new AppErrors('No permission',401)
     }
-
     const [,token]=headerToken.split(" ")
     
     try {
-        //Extraio as informações do token por meio da chave de acesso criada
-        const {sub:id_user}=verify(token,'934850186e4397c2227e386e48fa40d4a8ee6302') as IToken
-        const userRepository=new UserRepository()
-        const user=await userRepository.findById(id_user)
+        //Extraio as informações do refresh token por meio da chave de acesso criada
+        const {sub:id_user}=verify(token,auth.secret_refresh_token) as IToken
+
+        // const userRepository=new UserRepository()
+        const userTokenRepository=new UserTokenRepository()
+
+
+        const user=await userTokenRepository.findByUserIdAndRefreshToken(id_user,token)
         if(!user){
             throw new AppErrors('User not exists',400)
         }

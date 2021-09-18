@@ -20,5 +20,8 @@ export class DateProvider implements IDateProvider {
         const end=this.ConvertToUTC(endDate);
         return dayjs(end).diff(start,'days')
     }
+    addDays(day:number):Date {
+        return dayjs().add(day,'days').toDate()
+    }
 
 }
