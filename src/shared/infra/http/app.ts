@@ -13,6 +13,7 @@ import createConnection from '../typeORM'
 import { authRouter } from './routes/authenticate.routes';
 import { carRoutes } from './routes/CarRoutes.routes';
 import { rentalRoutes } from './routes/rental.routes';
+import { passwordForgotRouter } from './routes/password.routes';
 
 
 createConnection().then(db=>console.log(`Conectado ao banco ${db.driver.database}`))
@@ -29,6 +30,7 @@ app.use("/user", userRoutes);
 app.use(authRouter)
 app.use(carRoutes)
 app.use(rentalRoutes)
+app.use(passwordForgotRouter)
 
 
 app.use("/categories", categoriesRoutes);

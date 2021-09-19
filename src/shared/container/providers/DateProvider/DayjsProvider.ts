@@ -23,5 +23,10 @@ export class DateProvider implements IDateProvider {
     addDays(day:number):Date {
         return dayjs().add(day,'days').toDate()
     }
-
+    addHours(hours: number): Date {
+        return dayjs().add(hours, 'hours').toDate()
+    }
+    compareIsBefore(startDate: Date, endDate: Date): boolean {
+        return dayjs(startDate).isBefore(endDate)
+    }
 }
