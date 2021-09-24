@@ -1,3 +1,7 @@
+import { UserTokenRepositoryInMemory } from './../../repositoriesMemory/in-memory/UserTokenRepository';
+import { ITokenRepository } from './../../Protocols/Token/ITokenRepository';
+import { DateProvider } from './../../../../shared/container/providers/DateProvider/DayjsProvider';
+import { IDateProvider } from './../../../../shared/container/providers/DateProvider/Protocols/IDateProvider';
 
 import { AppErrors } from "../../../../shared/errors/AppErrors"
 import { IcreateUser } from "../../Protocols/User/CreateUserUserCase"
@@ -10,11 +14,19 @@ import { UserAuthService } from "./AuthenticateUserUserCase"
 let userRepositoryInMemory:UserRepositoryInMemory
 let userAuthUserCase:IUserAuthService
 let CreateUserUserCase:IcreateUser
+let dateProvider:IDateProvider
+let userTokenRepositoryInMemory:ITokenRepository
 
 describe('Authenticate user',()=>{
     beforeEach(()=>{
+        userTokenRepositoryInMemory=new UserTokenRepositoryInMemory()
+        dateProvider=new DateProvider()
         userRepositoryInMemory=new UserRepositoryInMemory();
-        userAuthUserCase= new UserAuthService(userRepositoryInMemory)
+        userAuthUserCase= new UserAuthService(
+            userRepositoryInMemory,
+            dateProvider,
+            userTokenRepositoryInMemory
+        )
         CreateUserUserCase= new createUserUserCase(userRepositoryInMemory)
     })
     it('should be able to authenticate user',async ()=>{

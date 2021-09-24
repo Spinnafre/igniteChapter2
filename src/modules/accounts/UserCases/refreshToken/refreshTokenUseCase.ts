@@ -16,6 +16,19 @@ interface IResponseRefreshTokenUseCase{
     token:string,
     refreshToken:string
 }
+/*
+- Usuário irá logar na aplicação
+- Irá criar o refresh_token e o token
+- O refresh token irá ser usado somente para criar um novo token,
+sempre que gerar um novo token irá gerar também um novo refresh token
+com a data superior ao token
+- Como o refresh token tem a expiração superior ao token, sempre que o
+token for inválido irá ser possível buscar o refresh_token do usuário 
+e criar um novo 
+- Cada requisição irá verificar o token
+- Quando o token estiver inválido, irá chamar a rota refreshToken para criar um novo token e refresh_token
+
+*/
 export class RefreshTokenUseCase{
     constructor(
     private userTokenRepository:ITokenRepository,

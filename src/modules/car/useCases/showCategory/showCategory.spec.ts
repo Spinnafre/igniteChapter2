@@ -34,13 +34,13 @@ describe('List categories', () => {
             description: "test category"
         })
         .set({
-            Authorization:`Bearer ${session.body.token}`
+            Authorization:`Bearer ${session.body.refreshToken}`
         })
 
         const categories=await supertest(app)
         .get('/categories')
         .set({
-            Authorization:`Bearer ${session.body.token}`
+            Authorization:`Bearer ${session.body.refreshToken}`
         })
 
         expect(categories.status).toBe(200)

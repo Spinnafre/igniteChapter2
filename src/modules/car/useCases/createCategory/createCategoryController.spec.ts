@@ -41,7 +41,7 @@ describe('Create Category Controller', () => {
             description: "test category"
         })
         .set({
-            Authorization:`Bearer ${session.body.token}`
+            Authorization:`Bearer ${session.body.refreshToken}`
         })
         
         expect(resp.status).toBe(201)
@@ -62,7 +62,7 @@ describe('Create Category Controller', () => {
             description: "test category"
         })
         .set({
-            Authorization:`Bearer ${session.body.token}`
+            Authorization:`Bearer ${session.body.refreshToken}`
         })
         
         expect(resp.status).toBe(400)

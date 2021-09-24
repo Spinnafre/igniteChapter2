@@ -12,7 +12,7 @@ interface IToken{
 }
 
 export async function authorizationUser(req:Request,res:Response,next:NextFunction){
-    //Extrai o refresh token
+    //Extrai o token
     const headerToken= req.headers.authorization
 
     if(!headerToken){
@@ -21,17 +21,9 @@ export async function authorizationUser(req:Request,res:Response,next:NextFuncti
     const [,token]=headerToken.split(" ")
     
     try {
-        //Extraio as informações do refresh token por meio da chave de acesso criada
-        const {sub:id_user}=verify(token,auth.secret_refresh_token) as IToken
+        //Extraio as informações do token por meio da chave de acesso criada
+        const {sub:id_user}=verify(token,auth.secret_token) as IToken
 
-        // const userRepository=new UserRepository()
-        const userTokenRepository=new UserTokenRepository()
-
-
-        const user=await userTokenRepository.findByUserIdAndRefreshToken(id_user,token)
-        if(!user){
-            throw new AppErrors('User not exists',400)
-        }
         //Para tornar possível adicionar um novo atributo no request do express será necessário 
         // sobrescrever a tipagem do express, criando um arquivo @types com o nome da lib e com 
         // o arquivo de configuração da tipagem adicionando o novo atributo
