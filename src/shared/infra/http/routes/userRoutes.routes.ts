@@ -8,7 +8,7 @@ import { authorizationUser } from "../middlewares/ensureAuthenticated";
 
 
 const userRoutes=Router()
-const uploadAvatar=multer(uploadConfig.upload('./tmp/avatar'))
+const uploadAvatar=multer(uploadConfig)
 
 userRoutes.post('/',(req,res)=>{
     return createUserController().handler(req,res)
