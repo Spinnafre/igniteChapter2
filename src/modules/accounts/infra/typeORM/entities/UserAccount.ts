@@ -16,10 +16,21 @@ export class User implements IUser{
     driver_license: string;
     @Column()
     admin: boolean;
-    @CreateDateColumn()
     @Column()
     avatar:string
+    @CreateDateColumn()
     created_at: Date;
+
+    get avatar_url():string{
+        switch (process.env.disk){
+            case 'local':
+                return `http://localhost:3333/avatar/${this.avatar}`
+            case 's3':
+                return `${process.env.AWS_BUCKET_URL}/avatar/${this.avatar}`
+            default:
+                return null
+        }
+    }
 
     constructor() {
         if (!this.id) {

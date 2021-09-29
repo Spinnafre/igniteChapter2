@@ -15,6 +15,7 @@ import { carRoutes } from './routes/CarRoutes.routes';
 import { rentalRoutes } from './routes/rental.routes';
 import { passwordForgotRouter } from './routes/password.routes';
 
+import uploadConfig from '../../../config/upload'
 
 createConnection().then(db=>console.log(`Conectado ao banco ${db.driver.database}`))
 
@@ -23,8 +24,11 @@ var upload = multer({ dest: './tmp' })
 const app = express();
 
 app.use('/api-docs',swagger.serve,swagger.setup(swaggerConfig))
+app.use('/avatar',express.static(`${uploadConfig.tmpFolder}/avatar`))
+app.use('/cars',express.static(`${uploadConfig.tmpFolder}/cars`))
 
 app.use(express.json());
+
 
 app.use("/user", userRoutes);
 app.use(authRouter)

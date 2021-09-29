@@ -4,6 +4,7 @@ import upload from '../../../../config/upload'
 
 import { IStorageProvider } from './Protocols/IStorageProvider';
 export class localStorageProvider implements IStorageProvider{
+    private static instance:IStorageProvider|null=null
     async save(file:string,folder:string): Promise<string> {
         // Irá pegar o arquivo que está salvo dentro da tmp,
         //irá jogar ele dentro da pasta especificada
@@ -12,6 +13,12 @@ export class localStorageProvider implements IStorageProvider{
             resolve(`${upload.tmpFolder}/${folder}`,file)
         )
         return file
+    }
+    public static getInstance(){
+        if(!localStorageProvider.instance){
+            localStorageProvider.instance= new localStorageProvider()
+        }
+        return localStorageProvider.instance
     }
     async delete(file:string,folder:string): Promise<string> {
         // Diretório do arquivo que irá apagar

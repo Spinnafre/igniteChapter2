@@ -9,8 +9,11 @@ export class CarImageRepository implements ICarsImageRepository{
     constructor(){
         this.carRepository= getRepository(CarImage)
     }
-    async create(data: ICarsImage): Promise<ICarsImage> {
-        const carImage= this.carRepository.create(data)
+    async create(car_id:string,image_name:string): Promise<ICarsImage> {
+        const carImage= this.carRepository.create({
+            car_id,
+            image_name
+        })
         await this.carRepository.save(carImage)
         return carImage
     }
