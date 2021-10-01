@@ -13,7 +13,7 @@ class SendForgotPasswordUseCase implements ISendForgotPasswordUseCase {
         private usersRepository: IUserRepository,
         private dateProvider: IDateProvider,
         private usersTokenRepository: ITokenRepository,
-        private EtherealMailProvider: IMailProvider,
+        private MailProvider: IMailProvider,
     ) { }
     async execute(email: string): Promise<void> {
         const user = await this.usersRepository.findByEmail(email)
@@ -38,7 +38,7 @@ class SendForgotPasswordUseCase implements ISendForgotPasswordUseCase {
         const templatePath=resolve(__dirname,'..','..','Views','emails','forgotPassword.hbs')
         console.log(templatePath)
 
-        await this.EtherealMailProvider
+        await this.MailProvider
         .sendMail(
             email, 
             'Recuperação de senha', 
