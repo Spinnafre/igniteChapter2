@@ -16,11 +16,11 @@ services:
     volumes: 
       - pgdata:/data/postgres
     #Fazer com que os container trabalhem na mesma rede, evitando problemas de ip diferentes
-    networks:
-      - my-proxy-net
+    # networks:
+    #   - my-proxy-net
   # Nome do serviço
   app:
-    # Gerar build a partir do diretório atual
+    # Gerar build a partir do diretório atual (Contexto da imagem será da pasta que estou executando o comando)
     build: .
     container_name: rentex-container
     ports: 
@@ -29,8 +29,8 @@ services:
     volumes:
       # Pega as informações do diretório atual (.) e jogar dentro do  /user/app
       - .:/user/app
-    networks:
-      - my-proxy-net
+    # networks:
+    #   - my-proxy-net
 networks:
   my-proxy-net:
     external:
