@@ -1,7 +1,9 @@
 import upload  from '../../../../config/upload';
 import { S3 } from "aws-sdk";
 
-import fs from "fs/promises";
+// import fs from "fs/promises";
+import {promises} from 'fs'
+const {readFile}=promises
 import mime from "mime";
 import { resolve } from "path";
 
@@ -25,7 +27,7 @@ export class S3StorageProvider implements IStorageProvider{
         const filePath=resolve(upload.tmpFolder,file)
         const ContentType= mime.getType(filePath)
         
-        const fileContent=await fs.readFile(filePath)
+        const fileContent=await readFile(filePath)
 
         await this.client.putObject({
             Bucket:`${process.env.AWS_BUCKET}/${folder}`,
