@@ -1,11 +1,14 @@
 import { SendForgotPasswordController } from './sendForgotPasswordController';
-import { EtherealMailProvider } from './../../../../shared/container/providers/MailProvider/Implementations/EtherealMailProvider';
 import { UserTokenRepository } from './../../infra/typeORM/repositories/TokenRepository';
 import { DateProvider } from './../../../../shared/container/providers/DateProvider/DayjsProvider';
 import { UserRepository } from './../../infra/typeORM/repositories/UserRepository';
 import { SendForgotPasswordUseCase } from './sendForgotPasswordUseCase';
 
-const etherealMailProvider= EtherealMailProvider.getInstance()
+// import { EtherealMailProvider } from './../../../../shared/container/providers/MailProvider/Implementations/EtherealMailProvider';
+
+import MailProvider from '../../../../shared/container/providers/MailProvider'
+
+// const MailProvider= EtherealMailProvider.getInstance()
 export default ():SendForgotPasswordController=>{
     const userRepository = new UserRepository()
     const dateProvider = new DateProvider()
@@ -14,7 +17,7 @@ export default ():SendForgotPasswordController=>{
         userRepository,
         dateProvider,
         usersTokenRepository,
-        etherealMailProvider
+        MailProvider
     )
     const sendForgoPasswordController=new SendForgotPasswordController(
         sendForgotPasswordUseCase

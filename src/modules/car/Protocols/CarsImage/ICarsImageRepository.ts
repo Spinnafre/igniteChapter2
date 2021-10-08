@@ -1,5 +1,5 @@
 import { ICarsImage } from "./ICarsImage";
 
 export interface ICarsImageRepository{
-    create(data: ICarsImage):Promise<ICarsImage>
+    create(car_id:string,image_name:string):Promise<ICarsImage>
 }

@@ -1,3 +1,9 @@
+### Não irá subir os arquivos dentro da pasta temp
+.vscode
+tmp/*
+### Para deixar o github manter a pasta vazia no repositorios, é necessário usar o .gitkeep
+!tmp/.gitkeep
+
 
 # Created by https://www.toptal.com/developers/gitignore/api/node
 # Edit at https://www.toptal.com/developers/gitignore?templates=node

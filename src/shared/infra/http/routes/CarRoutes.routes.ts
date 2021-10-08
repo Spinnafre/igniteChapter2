@@ -8,10 +8,11 @@ import carSpecificationController from '../../../../modules/car/useCases/createC
 import CarImagesController from '../../../../modules/car/useCases/UploadCarImagesUseCase'
 import {isAdmin}  from "../middlewares/ensureUserIsAdmin";
 
+import uploadConfig from '../../../../config/upload'
 
 const carRoutes=Router()
 
-var upload = multer({ dest: './tmp/vehicles' })
+var upload = multer(uploadConfig)
 
 carRoutes.post('/car',authorizationUser,isAdmin,(req,res)=>{
     return carController().handle(req,res)

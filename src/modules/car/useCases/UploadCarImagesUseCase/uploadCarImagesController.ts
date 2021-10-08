@@ -11,8 +11,6 @@ export class CreateCarImagesController{
         const {id:car_id}=req.params
         const images=req.files as IFile[]
 
-        console.log('images ',images)
-
         const images_names=images.map(file =>{
             return file.filename
         })

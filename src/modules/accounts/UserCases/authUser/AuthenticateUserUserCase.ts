@@ -9,14 +9,17 @@ import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { auth } from '../../../../config/auth';
 
-
+interface IRequest{
+    email:string,
+    password:string
+}
 export class UserAuthService implements IUserAuthService {
     constructor(
         private userRepository: IUserRepository,
         private dateProvidder:IDateProvider,
         private userTokenRepository:ITokenRepository,
     ) { }
-    async execute({ email, password }: IUser): Promise<IUserAuthProtocol> {
+    async execute({ email, password }: IRequest): Promise<IUserAuthProtocol> {
         const user = await this.userRepository.findByEmail(email)
         const { 
             secret_token,
