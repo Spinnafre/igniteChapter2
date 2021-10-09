@@ -2,6 +2,7 @@ name: CI
 
 on:
   push:
+		#Branch que irá executar a action
     branches: [ master ]
 
 
@@ -9,9 +10,12 @@ on:
 
 jobs:
   build:
+#Instância criada na amazon s3
     runs-on: ubuntu-latest
 
     steps:
+#Pega o código mais atual do github
+#https://github.com/actions
       - uses: actions/checkout@v2
 
       - name: Setup Nodejs
@@ -25,12 +29,13 @@ jobs:
       - name: Build
         run: npm run build
         
-
+# https://github.com/appleboy/scp-action
+#Irá copiar arquivos via ssh
       - uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }} 
-          source: "."
-          target: "~/igniteChapter2"
+          source: "., !node_modules"
+          target: "~/app/igniteChapter2"
