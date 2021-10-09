@@ -1,13 +1,13 @@
 {
     "type": "postgres",
     "host": "localhost",
-    "port": 5432,
+    "port": 65432,
     "username": "postgres",
-    "password": "1234",
+    "password": "w5wU@m",
     "database": "rentex",
-    "migrations":["./src/shared/infra/typeORM/migrations/*.ts"],
-    "entities":["./src/modules/**/infra/typeORM/entities/*.ts"],
+    "migrations":["./dist/shared/infra/typeORM/migrations/*.js"],
+    "entities":["./dist/modules/**/infra/typeORM/entities/*.js"],
     "cli":{
-        "migrationsDir":"./src/shared/infra/typeORM/migrations"
+        "migrationsDir":"./dist/shared/infra/typeORM/migrations"
     }
  }
