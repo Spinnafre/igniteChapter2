@@ -16,6 +16,8 @@ import { carRoutes } from './routes/CarRoutes.routes';
 import { rentalRoutes } from './routes/rental.routes';
 import { passwordForgotRouter } from './routes/password.routes';
 
+import rateLimiter from './middlewares/rateLimiter'
+
 import uploadConfig from '../../../config/upload'
 
 createConnection().then(db=>console.log(`Conectado ao banco ${db.driver.database}`))
@@ -23,6 +25,8 @@ createConnection().then(db=>console.log(`Conectado ao banco ${db.driver.database
 var upload = multer({ dest: './tmp' })
 
 const app = express();
+
+app.use(rateLimiter)
 
 app.use('/api-docs',swagger.serve,swagger.setup(swaggerConfig))
 app.use('/avatar',express.static(`${uploadConfig.tmpFolder}/avatar`))

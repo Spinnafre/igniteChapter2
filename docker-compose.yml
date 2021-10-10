@@ -19,24 +19,28 @@ services:
     #Fazer com que os container trabalhem na mesma rede, evitando problemas de ip diferentes
     # networks:
     #   - my-proxy-net
-  # Nome do serviço
-  app:
-    # Gerar build a partir do diretório atual (Contexto da imagem será da pasta que estou executando o comando)
-    build: .
-    container_name: rentex-container
+  # # Nome do serviço
+  # app:
+  #   # Gerar build a partir do diretório atual (Contexto da imagem será da pasta que estou executando o comando)
+  #   build: .
+  #   container_name: rentex-container
+  #   ports: 
+  #     # Definir o mapeamento de portas: Quando acessar a porta 3333 da minha máquina, irá acessar a 3333 do container
+  #     - 3333:3333
+  #   #Útil para compartilhar arquivos de sistma entre containers facilmente e fazer backup de dados
+  #   #Ou seja, ao serem criado os dados irão ficar salvos mesmo se os containers forem destruídos, evitando perder dados
+  #   #Tudo que o container armazena também irá ficar na máquina local, mesmo que o container deixe de existir
+  #   volumes:
+  #     # Pega as informações do diretório atual (.) e jogar dentro do  /user/app
+  #     - .:/user/app
+  #     # allow docker to track changes when other packages are installed or removed https://stackoverflow.com/a/61296358/14068908
+  #     - /user/app/node_modules/bcrypt/
+  
+  redis:
+    image: redis:alpine
     ports: 
-      # Definir o mapeamento de portas: Quando acessar a porta 3333 da minha máquina, irá acessar a 3333 do container
-      - 3333:3333
-    #Útil para compartilhar arquivos de sistma entre containers facilmente e fazer backup de dados
-    #Ou seja, ao serem criado os dados irão ficar salvos mesmo se os containers forem destruídos, evitando perder dados
-    #Tudo que o container armazena também irá ficar na máquina local, mesmo que o container deixe de existir
-    volumes:
-      # Pega as informações do diretório atual (.) e jogar dentro do  /user/app
-      - .:/user/app
-      # allow docker to track changes when other packages are installed or removed https://stackoverflow.com/a/61296358/14068908
-      - /user/app/node_modules/bcrypt/
-    # networks:
-    #   - my-proxy-net
+      - 6379:6379
+
 networks:
   my-proxy-net:
     external:
